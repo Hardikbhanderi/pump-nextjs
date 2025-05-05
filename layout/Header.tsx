@@ -342,10 +342,10 @@ const Header = () => {
             direction="row"
             spacing={3}
           > */}
-            {/* <LanguageSwitcher /> */}
-            {/* <ThemeToggle /> */}
-            {/* <Spacer /> */}
-            {/* <Flex
+          {/* <LanguageSwitcher /> */}
+          {/* <ThemeToggle /> */}
+          {/* <Spacer /> */}
+          {/* <Flex
               flex={{ base: 1, md: 'auto' }}
               ml={{ base: -2 }}
               display={{ base: 'flex', md: 'none' }}
