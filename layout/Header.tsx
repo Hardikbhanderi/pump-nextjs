@@ -22,6 +22,9 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { useTranslations } from 'next-intl';
 import LanguageSwitcher from '@/components/layout/LanguageSwitcher';
 import ThemeToggle from '@/components/layout/ThemeToggle';
+import { useEffect, useState } from 'react';
+import { useAuth } from '@/context/AuthContext';
+import { useRouter } from 'next/navigation';
 
 interface NavItem {
   label: string;
@@ -204,6 +207,21 @@ const Header = () => {
   const textColorPrimary = useColorModeValue('#363636', '#FFFFFF');
   const textColorSecondary = useColorModeValue('#2563EB', '#60A5FA');
   // const t = useTranslations();
+  const { isAuthenticated } = useAuth();
+  const router = useRouter();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => setIsClient(true), []);
+
+  useEffect(() => {
+    if (isClient) {
+      if (isAuthenticated) {
+        router.push('/dashboard');
+      } else {
+        router.push('/login');
+      }
+    }
+  }, [isAuthenticated, router, isClient]);
 
   return (
     <>

@@ -39,7 +39,15 @@ const DashboardPage = () => {
     const columns = userType === 'salesman' ? salesmanColumns : 2;
 
     return (
-      <Box borderRadius="md" p={4} boxShadow="md">
+      <Box
+        borderRadius="md"
+        p={4}
+        boxShadow="md"
+        display={'flex'}
+        flexDirection={'column'}
+        alignItems={'center'}
+        justifyContent={'center'}
+      >
         <Box
           mb={4}
           bg="gray.100"
@@ -47,6 +55,7 @@ const DashboardPage = () => {
           borderRadius="sm"
           textAlign="center"
           justifyContent={'center'}
+          width={'100%'}
         >
           <Text
             fontWeight="semibold"
@@ -71,7 +80,48 @@ const DashboardPage = () => {
             Show History
           </Button>
         </Box>
-        <SimpleGrid mt={4} columns={columns} spacing={2}>
+        {/* <Flex
+          justifyContent={'center'}
+          alignItems={'center'}
+          flexDirection={'row'}
+          flexWrap={'wrap'}
+          gap={2}
+          mt={4}
+        >
+          <Button
+            size="lg"
+            colorScheme="green"
+            onClick={() => toggleModal('scan')}
+          >
+            Scan Bill
+          </Button>
+
+          <Button
+            size="lg"
+            colorScheme="blue"
+            onClick={() =>
+              toggleModal(showTakePayment ? 'takePayment' : 'payFuel')
+            }
+          >
+            {showTakePayment ? 'Take Payment' : 'Pay For Fuel'}
+          </Button>
+
+          {showAssignMachine && (
+            <Button
+              // display={{ base: 'none', md: 'inline-flex' }}
+              size="lg"
+              colorScheme="purple"
+              onClick={() => toggleModal('assignMachine')}
+            >
+              Assign Machine
+            </Button>
+          )}
+        </Flex> */}
+        <SimpleGrid
+          columns={columns}
+          spacing={2}
+          maxW={{ base: 'none', sm: '80%', md: '70%' }}
+        >
           <Button
             size="lg"
             colorScheme="green"
@@ -93,6 +143,7 @@ const DashboardPage = () => {
           {showAssignMachine && (
             <Button
               size="lg"
+              display={{ base: 'none', md: 'inline-flex' }}
               colorScheme="purple"
               onClick={() => toggleModal('assignMachine')}
             >
@@ -100,6 +151,19 @@ const DashboardPage = () => {
             </Button>
           )}
         </SimpleGrid>
+        {showAssignMachine && (
+          <Flex justifyContent={'center'}>
+            <Button
+              display={{ base: 'inline-flex', md: 'none' }}
+              mt={2}
+              size="lg"
+              colorScheme="purple"
+              onClick={() => toggleModal('assignMachine')}
+            >
+              Assign Machine
+            </Button>
+          </Flex>
+        )}
       </Box>
     );
   };
@@ -138,12 +202,12 @@ const DashboardPage = () => {
     <Flex minH="100%" align="center" justify="center" p={4}>
       <Stack
         spacing={4}
-        maxWidth={{ base: '90vw', md: 'container.md', lg: 'container.lg' }}
+        maxWidth={{ base: '90vw', md: 'container.md', lg: 'container.md' }}
         width="full"
       >
-         <FormControl>
+        <FormControl>
           <FormLabel>Select User Type</FormLabel>
-          <Select value={userType} onChange={handleChange} colorScheme='blue'>
+          <Select value={userType} onChange={handleChange} colorScheme="blue">
             <option value="customer">Customer</option>
             <option value="salesman">Salesman</option>
             <option value="admin">Admin</option>
